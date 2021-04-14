@@ -1,3 +1,7 @@
 .profile__info{
-    
+    margin: 0;
+    font-size: 18px;
+    line-height: 21,78px;
+    font-weight: 400;
+    /* padding-top: 16px; */
 }
