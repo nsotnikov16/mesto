@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="pages/index.css">
+  <title>Mesto</title>
+</head>
+<body class="body">
+    <div class="page">
+        <header class="header">
+            <img src="images/logo.png" alt="Логотип" class="header__logo">
+        </header>
+        <main class="content">
+            <section class="profile">
+                <img src="images/avatar.jpg" alt="Аватар" class="profile__avatar">
+                <div class="profile__into">
+                    <h1 class="profile__username">Жак-Ив Кусто</h1>
+                    <p class="profile__info">Исследователь океана</p>
+                    <button class="edit-button"><div class="edit-button__icon"></div></button>
+                </div>
+                <button class="add-button">+</button>
+            </section>
+            <section class="elements">
+                <div class="elements__place">
+                    <img src="images/moscow-city.jpeg" alt="Москва-Сити" class="elements__photo">
+                    <div class="elements__name-like">
+                        <h2 class="elements__title">Москва-Сити</h2>
+                        <div class="elements__like"></div>
+                    </div>
+                </div>
+                <div class="elements__place">
+                    <img src="images/piter.jpeg" alt="Санкт-Петербург" class="elements__photo">
+                    <div class="elements__name-like">
+                        <h2 class="elements__title">Санкт-Петербург</h2>
+                        <div class="elements__like"></div>
+                    </div>
+                </div>
+                <div class="elements__place">
+                    <img src="images/sochi.jpeg" alt="Сочи" class="elements__photo">
+                    <div class="elements__name-like">
+                        <h2 class="elements__title">Сочи</h2>
+                        <div class="elements__like"></div>
+                    </div>
+                </div>
+                <div class="elements__place">
+                    <img src="/images/surgut.jpeg" alt="Сургут" class="elements__photo">
+                    <div class="elements__name-like"></div>
+                        <h2 class="elements__title">Сургут</h2>
+                        <div class="elements__like"></div>
+                    </div>
+                </div>
+                <div class="elements__place">
+                    <img src="images/voronezh.jpeg" alt="Воронеж" class="elements__photo">
+                    <div class="elements__name-like"></div>
+                        <h2 class="elements__title">Воронеж</h2>
+                        <div class="elements__like"></div>
+                    </div>
+                </div>
+                <div class="elements__place">
+                    <img src="images/karachaevsk.jpg" alt="Карачаево-Черкесия" class="elements__photo">
+                    <div class="elements__name-like"></div>
+                        <h2 class="elements__title">Карачаево-Черкесия</h2>
+                        <div class="elements__like"></div>
+                    </div>
+                </div>
+            </section>
+            <div class="popup">
+                <div class="popup__container"></div>
+                    <h2 class="popup__title">Редактировать профиль</h2>
+                    <input type="text" placeholder="Имя" class="popup__username">
+                    <input type="text" placeholder="О себе" class="popup__info">
+                    <button class="popup__save">Сохранить</button>
+                </div>
+            </div>
+        </main>
+        <footer class="footer">
+            <p class="footer__copyright">© 2020 Mesto Russia</p>
+        </footer>
+    </div>
+</body>
+</html>
