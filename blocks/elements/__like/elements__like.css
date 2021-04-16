@@ -5,10 +5,15 @@
     border: 0;
     background-color: #ffffff;
     padding: 0;
+    outline: 0;
 }
 
-.element__like:hover{
+.elements__like:hover{
     opacity: 0.5;
     cursor: pointer;
-    
+}
+
+.elements__like:hover:active{
+    opacity: 1;
+    background-color: #000000;
 }

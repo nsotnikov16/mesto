@@ -3,3 +3,9 @@
     margin: 45px 0 36.25px;
     border-bottom: 1px solid #545454;
 }
+
+@media (max-width: 470px) {
+    .header {
+        margin: 28px 0 42px;
+    }
+}

@@ -4,3 +4,10 @@
     line-height: 21.78px;
     color: #545454;
 }
+
+@media (max-width: 470px) {
+    .footer__copyright {
+        font-size: 14px;
+        line-height: 19px;
+    }
+}

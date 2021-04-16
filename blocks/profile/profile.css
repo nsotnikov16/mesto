@@ -7,3 +7,11 @@
     max-height: 120px;
     margin-bottom: 51px;
 }
+
+@media (max-width: 470px) {
+    .profile {
+        flex-direction: column;
+        margin-bottom: 36px;
+        max-height: 286px;
+    }
+}

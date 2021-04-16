@@ -1,5 +1,5 @@
 .add-button{
-    display: inline-block;
+    display: block;
     width: 150px;
     height: 50px;
     border: 2px solid #FFFFFF;
@@ -11,4 +11,27 @@
     background-repeat: no-repeat;
     background-position: center;
     justify-self: flex-end;
+}
+
+.add-button:hover{
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+@media (max-width: 570px) {
+    .add-button {
+        width: 100px;
+    }
+}
+
+@media (max-width: 520px) {
+    .add-button {
+        width: 50px;
+    }
+}
+
+@media (max-width: 470px) {
+    .add-button {
+        width: 282px;
+    }
 }
