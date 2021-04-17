@@ -1,10 +1,18 @@
 .popup{
     display: none;
     position: absolute;
-    margin: 0 -213px 0 -213px;
+    margin: 0 -213px;
     top: 50%;
     left: 50%;
     max-width: 430px;
     border-radius: 10px;
     background-color: white;
+    z-index: 2;
+}
+
+@media (max-width: 600px) {
+    .popup {
+        max-width: 282px;
+        margin: 0 -141px;
+    }
 }

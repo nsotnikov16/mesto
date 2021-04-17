@@ -5,3 +5,9 @@
     padding: 34px 36px 37px;
     color: black;
 }
+
+@media (max-width: 600px) {
+    .popup__container {
+        padding: 25px 22px;
+    }
+}

@@ -9,3 +9,10 @@
     padding: 0 0 13px 0;
     outline: none;
 }
+
+@media (max-width: 600px) {
+    .popup__info {
+        margin-bottom: 45px;
+        width: 238px;
+    }
+}

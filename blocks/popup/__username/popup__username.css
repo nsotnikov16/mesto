@@ -9,3 +9,9 @@
     padding: 0 0 13px 0;
     outline: none;
 }
+
+@media (max-width: 600px){
+    .popup__username{
+        width: 238px;
+    }
+}
