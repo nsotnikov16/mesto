@@ -1,5 +1,6 @@
 .profile__into{
     display: flex;
+    position: relative;
     flex-direction: column;
     max-height: 336px;
     align-self: center;
