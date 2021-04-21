@@ -15,5 +15,5 @@
 
 .elements__like:hover:active{
     opacity: 1;
-    background-color: #000000;
+    background-image: url(../../../images/like_active.svg);
 }

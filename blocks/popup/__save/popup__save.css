@@ -9,6 +9,11 @@
     border-radius: 2px;
 }
 
+.popup__save:hover{
+    cursor: pointer;
+    opacity: 0.8;
+}
+
 @media (max-width: 600px) {
     .popup__save {
         width: 238px;

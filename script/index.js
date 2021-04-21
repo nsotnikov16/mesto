@@ -33,7 +33,6 @@ function formSubmitHandler (evt) {
 }
 
 form.addEventListener('submit', formSubmitHandler);
-
 editButton.addEventListener('click', togglePopup);
 closePopupButton.addEventListener('click', togglePopup);
 popup.addEventListener('click', handleOverlayClick);
