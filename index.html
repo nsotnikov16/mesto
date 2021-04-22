@@ -9,83 +9,83 @@
 <body class="body">
     <div class="page">
         <header class="header">
-            <img src="images/logo.png" alt="Логотип" class="header__logo">
+            <img src="images/logo.svg" alt="Логотип" class="header__logo">
         </header>
-        <main class="content">
+        <main class="content page__container">
             <section class="profile">
                 <div class="profile__container">
                     <img src="images/avatar.jpg" alt="Аватар" class="profile__avatar">
                     <div class="profile__into">
                         <div class="profile__username-btn">
                             <h1 class="profile__username">Жак-Ив Кусто</h1>
-                            <button class="edit-button"></button>
+                            <button type="submit" class="profile__edit-btn"></button>
                         </div>
                         <p class="profile__info">Исследователь океана</p>
                     </div>
                 </div>
-                <button class="add-button"></button>
+                <button type="submit" class="profile__add-btn"></button>
             </section>
             <section class="elements">
                 <div class="elements__place">
                     <img src="images/moscow-city.jpg" alt="Москва-Сити" class="elements__photo">
                     <div class="elements__name-like">
                         <h2 class="elements__title">Москва-Сити</h2>
-                        <button class="elements__like"></button>
+                        <button type="submit" class="elements__like"></button>
                     </div>
                 </div>
                 <div class="elements__place">
                     <img src="images/piter.jpg" alt="Санкт-Петербург" class="elements__photo">
                     <div class="elements__name-like">
                         <h2 class="elements__title">Санкт-Петербург</h2>
-                        <button class="elements__like"></button>
+                        <button type="submit" class="elements__like"></button>
                     </div>
                 </div>
                 <div class="elements__place">
                     <img src="images/sochi.jpg" alt="Сочи" class="elements__photo">
                     <div class="elements__name-like">
                         <h2 class="elements__title">Сочи</h2>
-                        <button class="elements__like"></button>
+                        <button type="submit" class="elements__like"></button>
                     </div>
                 </div>
                 <div class="elements__place">
                     <img src="images/surgut.jpg" alt="Сургут" class="elements__photo">
                     <div class="elements__name-like">
                         <h2 class="elements__title">Сургут</h2>
-                        <button class="elements__like"></button>
+                        <button type="submit" class="elements__like"></button>
                     </div>
                 </div>
                 <div class="elements__place">
                     <img src="images/voronezh.jpg" alt="Воронеж" class="elements__photo">
                     <div class="elements__name-like">
                         <h2 class="elements__title">Воронеж</h2>
-                        <button class="elements__like"></button>
+                        <button type="submit" class="elements__like"></button>
                     </div>
                 </div>
                 <div class="elements__place">
                     <img src="images/karachaevsk.jpg" alt="Карачаево-Черкесия" class="elements__photo">
                     <div class="elements__name-like">
                         <h2 class="elements__title">Карачаево-Черкесия</h2>
-                        <button class="elements__like"></button>
+                        <button type="submit" class="elements__like"></button>
                     </div>
                 </div>
             </section>
-            <div class="popup">
-                <div class="popup__container">
-                    <button class="popup__close"></button>
-                    <h2 class="popup__title">Редактировать профиль</h2>
-                    <form class="popup__form">
-                        <fieldset class="popup__main-info">
-                            <input type="text" value="Имя" class="popup__username">
-                            <input type="text" value="О себе" class="popup__info">
-                        </fieldset>
-                        <button type="submit" class="popup__save">Сохранить</button>
-                    </form>
-                </div>
-            </div>
         </main>
-        <footer class="footer">
+        <footer class="footer page__container">
             <p class="footer__copyright">© 2020 Mesto Russia</p>
         </footer>
+        <div class="popup">
+            <div class="popup__container">
+                <button class="popup__close"></button>
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <form class="popup__form" name="form">
+                    <fieldset class="popup__main-info">
+                        <input type="text" name="name" class="popup__input popup__input_username">
+                        <input type="text" name="info" class="popup__input popup__input_info">
+                    </fieldset>
+                    <button type="submit" class="popup__save">Сохранить</button>
+                </form>
+            </div>
+        </div>
     </div>
     <script src="script/index.js"></script>
 </body>

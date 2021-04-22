@@ -3,7 +3,7 @@
     width: 22px;
     height: 19px;
     border: 0;
-    background-color: #ffffff;
+    background-color: transparent; /* По макету стоит определенный светлый фон, но получается серая кнопка. Думаю таким способом подойдет */
     padding: 0;
     outline: 0;
 }
