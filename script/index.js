@@ -1,4 +1,4 @@
-const editButton = document.querySelector('.profile__edit-btn');
+/* const editButton = document.querySelector('.profile__edit-btn');
 const popup = document.querySelector('.popup');
 const closePopupButton = document.querySelector('.popup__close');
 const profileUserName = document.querySelector('.profile__username');
@@ -41,3 +41,4 @@ closePopupButton.addEventListener('click', closePopup);
 popup.addEventListener('click', handleOverlayClick);
 
 
+ */

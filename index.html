@@ -4,89 +4,138 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="pages/index.css">
-  <title>Mesto</title>
+  <title>Beauty Alexandria</title>
 </head>
-<body class="body">
+<body>
     <div class="page">
         <header class="header">
-            <img src="images/logo.svg" alt="Логотип" class="header__logo">
+            <div class="header__container"></div>
+                <div class="header__contact-bar theme_contact-bar">
+                    <nav class="header__contacts">
+                        <ul class="contacts-list">
+                            <li class="phone-number">
+                                <img src="images/Icons/WhatsApp.png" alt="WhatsApp" class="icons icons_wa">
+                                <img src="images/Icons/Viber.png" alt="Viber" class="icons icons_viber">
+                                <img src="images/Icons/Telegram.svg" alt="Telegram" class="icons icons_tlg">
+                                <a href="tel:+7999999999999" class="phone-number__link">+7999999999999</a>
+                            </li>
+                            <li class="location">
+                                <img src="images/Icons/location.png" alt="Точка" class="icons icons_location">
+                                <p class="location__text">г. Сургут, ул. Ленина, д.43, "City Center"</p>
+                            </li>
+                            <li class="instagram">
+                                <a href="https://www.instagram.com/kulturamanicura.surgut" class="instagram__link"><img src="images/Icons/instagram.svg" alt="Inst" class="icons icons_instagram">beautyalexandria.surgut</a>
+                            </li>
+                            <li class="mail">
+                                <img src="images/Icons/Mail.png" alt="Mail" class="icons icons_mail">
+                                <p class="mail__text">beautyalexandria@mail.ru</p>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="header__main-title theme_main-title">
+                    <h1 class="header__title"><span class="beauty">Beauty</span> <span class="alexandria">Alexandria</span></h1>
+                </div>
+                <div class="header__main-menu theme_main-menu">
+                    <nav class="menu">
+                        <a href="" class="menu__link">Главная</a>
+                        <a href="" class="menu__link">Прайс</a>
+                        <a href="" class="menu__link">Мои работы</a>
+                        <a href="" class="menu__link">Контакты</a>
+                        <a href="" class="menu__link">Новости</a>
+                    </nav>
+                </div>
+            </div>
         </header>
-        <main class="content page__container">
-            <section class="profile">
-                <div class="profile__container">
-                    <img src="images/avatar.jpg" alt="Аватар" class="profile__avatar">
-                    <div class="profile__into">
-                        <div class="profile__username-btn">
-                            <h1 class="profile__username">Жак-Ив Кусто</h1>
-                            <button type="button" class="profile__edit-btn"></button>
-                        </div>
-                        <p class="profile__info">Исследователь океана</p>
-                    </div>
+        <main class="content">
+            <section class="info theme_info">
+                <div class="info__container">
+                    <h2 class="info__title">Маникиюр от Александрии Романовой</h2>
+                    <h2 class="info__title-two">Полюбишь меня с первого раза</h2>
+                    <p class="info__paragraph">Ухоженные ногти с красивым рисунком украсят и разнообразят Ваш образ, внесут в него новизну
+                        Стериально и качественно
+                        Запись через Instagram, WhatsApp, Viber, Telegram
+                    </p>
+                    <button type="button" class="info__btn">Подробнее</button>
                 </div>
-                <button type="button" class="profile__add-btn"></button>
             </section>
-            <section class="elements">
-                <div class="elements__place">
-                    <img src="images/moscow-city.jpg" alt="Москва-Сити" class="elements__photo">
-                    <div class="elements__name-like">
-                        <h2 class="elements__title">Москва-Сити</h2>
-                        <button type="button" class="elements__like"></button>
+            <section class="services theme_services">
+                <div class="services__container">
+                    <h2 class="services__title">Услуги</h2>
+                    <div class="services__cards">
+                        <div class="card">
+                            <img src="" alt="" class="card__img">
+                            <h2 class="card__title">Маникюр</h2>
+                            <p class="card__price">800 руб.</p>
+                            <p class="card__subtitle">Женский и мужской</p>
+                        </div>
+                        <div class="card">
+                            <img src="" alt="" class="card__img">
+                            <h2 class="card__title">Маникюр c покрытием гель-лак</h2>
+                            <p class="card__price">1400 руб.</p>
+                            <p class="card__subtitle">В стоимость входит ремонт трещины и экспресс дизайн 2х пальчиков</p>
+                        </div>
+                        <div class="card">
+                            <img src="" alt="" class="card__img">
+                            <h2 class="card__title">Наращивание ногтей</h2>
+                            <p class="card__price">2000-2500 руб.</p>
+                            <p class="card__subtitle">(От длины 1 до 3)
+                                Коррекция наращивания по стоимости наращивания
+                            </p>
+                        </div>
+                        <div class="card">
+                            <img src="" alt="" class="card__img">
+                            <h2 class="card__title">Педикюр (пальчики)</h2>
+                            <p class="card__price">1400 руб.</p>
+                            <p class="card__subtitle">Педикюр с покрытием <span class="price-dop">1900 руб.</span></p>
+                            <p class="card__subtitle">Педикюр без покрытия <span class="price-dop">1600 руб.</span></p>
+                        </div>
                     </div>
                 </div>
-                <div class="elements__place">
-                    <img src="images/piter.jpg" alt="Санкт-Петербург" class="elements__photo">
-                    <div class="elements__name-like">
-                        <h2 class="elements__title">Санкт-Петербург</h2>
-                        <button type="button" class="elements__like"></button>
-                    </div>
+            </section>
+            <section class="myworks theme_myworks">
+                <div class="myworks__container">
+
                 </div>
-                <div class="elements__place">
-                    <img src="images/sochi.jpg" alt="Сочи" class="elements__photo">
-                    <div class="elements__name-like">
-                        <h2 class="elements__title">Сочи</h2>
-                        <button type="button" class="elements__like"></button>
-                    </div>
-                </div>
-                <div class="elements__place">
-                    <img src="images/surgut.jpg" alt="Сургут" class="elements__photo">
-                    <div class="elements__name-like">
-                        <h2 class="elements__title">Сургут</h2>
-                        <button type="button" class="elements__like"></button>
-                    </div>
-                </div>
-                <div class="elements__place">
-                    <img src="images/voronezh.jpg" alt="Воронеж" class="elements__photo">
-                    <div class="elements__name-like">
-                        <h2 class="elements__title">Воронеж</h2>
-                        <button type="button" class="elements__like"></button>
-                    </div>
-                </div>
-                <div class="elements__place">
-                    <img src="images/karachaevsk.jpg" alt="Карачаево-Черкесия" class="elements__photo">
-                    <div class="elements__name-like">
-                        <h2 class="elements__title">Карачаево-Черкесия</h2>
-                        <button type="button" class="elements__like"></button>
+            </section>
+            <section class="myself theme_myself">
+                <div class="myself__container">
+                    <img src="" alt="Я" class="myself__photo">
+                    <div class="myself__info">
+                        <h2 class="myself__name">Александрия Романова</h2>
+                        <p class="myself__osebe">Рада приветствовать у себя на сайте.
+                            Спасибо, что выбираете меня.
+                            Ваши ноготочки в надежных руках!</p>
                     </div>
                 </div>
             </section>
         </main>
-        <footer class="footer page__container">
-            <p class="footer__copyright">© 2020 Mesto Russia</p>
-        </footer>
-        <div class="popup">
-            <div class="popup__container">
-                <button type="button" class="popup__close"></button>
-                <h2 class="popup__title">Редактировать профиль</h2>
-                <form class="popup__form" name="form">
-                    <fieldset class="popup__main-info">
-                        <input type="text" name="name" class="popup__input popup__input_field_username">
-                        <input type="text" name="info" class="popup__input popup__input_field_info">
-                    </fieldset>
-                    <button type="submit" class="popup__save">Сохранить</button>
-                </form>
+        <footer class="footer theme_footer">
+            <div class="footer__container">
+                <nav class="footer__menu">
+                    <ul class="contacts-list">
+                        <li class="phone-number">
+                            <img src="images/Icons/WhatsApp.png" alt="WhatsApp" class="icons icons_wa">
+                            <img src="images/Icons/Viber.png" alt="Viber" class="icons icons_viber">
+                            <img src="images/Icons/Telegram.svg" alt="Telegram" class="icons icons_tlg">
+                            <a href="tel:+7999999999999" class="phone-number__link">+7999999999999</a>
+                        </li>
+                        <li class="location">
+                            <img src="images/Icons/location.png" alt="Точка" class="icons icons_location">
+                            <p class="location__text">г. Сургут, ул. Ленина, д.43, "City Center"</p>
+                        </li>
+                        <li class="instagram">
+                            <a href="https://www.instagram.com/kulturamanicura.surgut" class="instagram__link"><img src="images/Icons/instagram.svg" alt="Inst" class="icons icons_instagram">beautyalexandria.surgut</a>
+                        </li>
+                        <li class="mail">
+                            <img src="images/Icons/Mail.png" alt="Mail" class="icons icons_mail">
+                            <p class="mail__text">beautyalexandria@mail.ru</p>
+                        </li>
+                    </ul>
+                </nav>
+                <p class="footer__copyright">2021. Alexandria Romanova</p>
             </div>
-        </div>
+        </footer>
     </div>
-    <script src="script/index.js"></script>
 </body>
 </html>
