@@ -41,7 +41,7 @@ editButton.addEventListener('click', openPopupProfile);
 closePopupProfileButton.addEventListener('click', closePopupProfile);
 popupProfile.addEventListener('click', handleOverlayClickProfile);
 
-//POPUP NEWPLACE
+//POPUP NEWPLACE // WITH IMAGE 
 
 const addButton = document.querySelector('.profile__add-btn');
 const popupNewPlace = document.querySelector('.popup-newplace');
@@ -53,6 +53,12 @@ const formNewPlace = document.querySelector('.form-newplace');
 const newPlaceTemplate = document.querySelector('#newplace').content;
 const elements = document.querySelector('.elements');
 const trashButton = document.querySelector('.elements__trash-btn');
+
+const popupWithImage = document.querySelector('.popup-img');
+const popupWithImageTitle = document.querySelector('.popup-img__title');
+const popupWithImagePhoto = document.querySelector('.popup-img__image');
+const closePopupWithImageButton = document.querySelector('.popup-img__close');
+
 const initialCards = [
     {
       name: 'Архыз',
@@ -112,10 +118,37 @@ initialCards.forEach(function (item) {
         evt.target.classList.toggle('elements__like_active');
     });
 
+    const popupWithImage = document.querySelector('.popup-img');
+    const popupWithImageTitle = document.querySelector('.popup-img__title');
+    const popupWithImagePhoto = document.querySelector('.popup-img__image');
+    const closePopupWithImageButton = document.querySelector('.popup-img__close');
+
+
+    function openPopupWithImage () {
+        popupWithImage.classList.add('popup-img_opened');
+        popupWithImagePhoto.src = item.link;
+        popupWithImageTitle.textContent = item.name;
+
+    }
+    
+    function closePopupWithImage () {
+        popupWithImage.classList.remove('popup-img_opened');
+    }
+    
+    function handleOverlayClickWithImage(event) {
+        if (event.target === event.currentTarget) {
+            openPopupWithImage() || closePopupWithImage();
+        } 
+    }
+
+    newPlaceElement.querySelector('.elements__photo').addEventListener('click', openPopupWithImage);
+    closePopupWithImageButton.addEventListener('click', closePopupWithImage);
+    popupWithImage.addEventListener('click', handleOverlayClickWithImage);
+    
     return newPlaceElement;
 })
 
-function addNewPlaceClickButton() {
+function addNewPlaceClickButton(evt) {
     const newPlaceElement = newPlaceTemplate.querySelector('.elements__place').cloneNode(true);
     newPlaceElement.querySelector('.elements__photo').src = `${popupLinkPlace.value}`;
     newPlaceElement.querySelector('.elements__photo').alt = `${popupNamePlace.value}`;
@@ -146,3 +179,5 @@ formNewPlace.addEventListener('submit', formSubmitHandlerNewPlace);
 addButton.addEventListener('click', openPopupNewPlace);
 closePopupNewPlaceButton.addEventListener('click', closePopupNewPlace);
 popupNewPlace.addEventListener('click', handleOverlayClickNewPlace);
+
+
