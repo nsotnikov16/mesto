@@ -52,6 +52,7 @@ const saveNewPlaceButton = document.querySelector('.save-newplace');
 const formNewPlace = document.querySelector('.form-newplace');
 const newPlaceTemplate = document.querySelector('#newplace').content;
 const elements = document.querySelector('.elements');
+const trashButton = document.querySelector('.elements__trash-btn');
 const initialCards = [
     {
       name: 'Архыз',
@@ -93,19 +94,33 @@ function handleOverlayClickNewPlace(event) {
     } 
 }
 
-function addNewPlaceStartPage(item) {
+initialCards.forEach(function (item) {
     const newPlaceElement = newPlaceTemplate.querySelector('.elements__place').cloneNode(true);
-    newPlaceElement.querySelector('.elements__photo').src = initialCards[item].link;
-    newPlaceElement.querySelector('.elements__photo').alt = initialCards[item].name;
-    newPlaceElement.querySelector('.elements__title').textContent = initialCards[item].name;
+    newPlaceElement.querySelector('.elements__photo').src = item.link;
+    newPlaceElement.querySelector('.elements__photo').alt = item.name;
+    newPlaceElement.querySelector('.elements__title').textContent = item.name;
+    const trashButton = newPlaceElement.querySelector('.elements__trash-btn');
+    const like = newPlaceElement.querySelector('.elements__like');
     elements.append(newPlaceElement);
-}
+
+    function handleRemoveCard(evt) {
+        evt.target.closest('.elements__place').remove();
+    };
+    trashButton.addEventListener('click', handleRemoveCard);
+
+    like.addEventListener('click', function (evt) {
+        evt.target.classList.toggle('elements__like_active');
+    });
+
+    return newPlaceElement;
+})
 
 function addNewPlaceClickButton() {
     const newPlaceElement = newPlaceTemplate.querySelector('.elements__place').cloneNode(true);
     newPlaceElement.querySelector('.elements__photo').src = `${popupLinkPlace.value}`;
     newPlaceElement.querySelector('.elements__photo').alt = `${popupNamePlace.value}`;
     newPlaceElement.querySelector('.elements__title').textContent = `${popupNamePlace.value}`;
+    newPlaceElement.querySelector('.elements__trash-btn');
     elements.prepend(newPlaceElement);
 }
 
@@ -113,13 +128,21 @@ function formSubmitHandlerNewPlace (evt) {
     evt.preventDefault();
     addNewPlaceClickButton();
     closePopupNewPlace();
+    popupNamePlace.value = "";
+    popupLinkPlace.value = "";
+
+    const trashButtonAfter = document.querySelector('.elements__trash-btn');
+    trashButtonAfter.addEventListener('click', function (evt) {
+        evt.target.closest('.elements__place').remove();
+    })
+
+    const likeAfter = document.querySelector('.elements__like');
+    likeAfter.addEventListener('click', function (evt) {
+        evt.target.classList.toggle('elements__like_active');
+    });
 }
 
 formNewPlace.addEventListener('submit', formSubmitHandlerNewPlace);
 addButton.addEventListener('click', openPopupNewPlace);
 closePopupNewPlaceButton.addEventListener('click', closePopupNewPlace);
 popupNewPlace.addEventListener('click', handleOverlayClickNewPlace);
-
-for (let i = 0; i < initialCards.length; i++) {
-    addNewPlaceStartPage(i);
-}
