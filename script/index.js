@@ -212,7 +212,6 @@ function formSubmitHandlerNewPlace (evt) {
 }
 //------------------------------------------------
 
-
 //ОБРАБОТЧИКИ СОБЫТИЙ
 //--------------------------------------------------
 formProfile.addEventListener('submit', formSubmitHandlerProfile);
