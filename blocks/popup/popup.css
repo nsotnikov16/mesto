@@ -1,5 +1,5 @@
 .popup{
-    display: none;
+    display: flex;
     position: fixed;
     margin: auto;
     top: 0;
@@ -9,10 +9,6 @@
     background-color: rgba(0, 0, 0, .5);
     z-index: 1;
     box-sizing: border-box;
+    visibility: hidden;
     opacity: 0;
-    transition: opacity 0.5s linear;
-}
-
-.popup:hover{
-    opacity: 1;
 }
