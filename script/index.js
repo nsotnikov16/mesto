@@ -98,7 +98,7 @@ function closePopupWithImage () {
 
 function handleOverlayClick(evt) {
     if (evt.target === evt.currentTarget) {
-        openPopup(evt.target) || closePopup(evt.target);
+        closePopup(evt.target);
     }
 }
 
@@ -109,22 +109,16 @@ function handleSubmitProfile (evt) {
     closePopup(popupProfile);
 }
 
-function createCard(link, name, position) {
+function createCard(link, name) {
     const newPlaceElement = newPlaceTemplate.querySelector('.elements__place').cloneNode(true);
     const trashButton = newPlaceElement.querySelector('.elements__trash-btn');
     const likeButton = newPlaceElement.querySelector('.elements__like');
     const photo = newPlaceElement.querySelector('.elements__photo');
+    const photoTitle = newPlaceElement.querySelector('.elements__title');
     
-    newPlaceElement.querySelector('.elements__photo').src = link;
-    newPlaceElement.querySelector('.elements__photo').alt = name;
-    newPlaceElement.querySelector('.elements__title').textContent = name;
-    
-
-    if (position === 1) {
-        elements.append(newPlaceElement);
-    } else {
-        elements.prepend(newPlaceElement);
-    }
+    photo.src = link;
+    photo.alt = name;
+    photoTitle.textContent = name;
     
     function handleRemoveCard(evt) {
         evt.target.closest('.elements__place').remove();
@@ -143,15 +137,14 @@ function createCard(link, name, position) {
     trashButton.addEventListener('click', handleRemoveCard);
     likeButton.addEventListener('click', handleLikeCard);
     photo.addEventListener('click', openPopupWithImage);
-    popupWithImage.addEventListener('click', handleOverlayClick);
-    closePopupWithImageButton.addEventListener('click', closePopupWithImage);
 
     return newPlaceElement;
 }
 
 function handleSubmitNewPlace (evt) {
     evt.preventDefault();
-    createCard(popupLinkPlace.value, popupNamePlace.value);
+    const addNewCardPage = createCard(popupLinkPlace.value, popupNamePlace.value);
+    elements.prepend(addNewCardPage);
     closePopup(popupNewPlace);
     popupNamePlace.value = "";
     popupLinkPlace.value = "";
@@ -161,7 +154,8 @@ function handleSubmitNewPlace (evt) {
 //forEACH
 //---------------------------------------
 initialCards.forEach(function (item) {
-    createCard(item.link, item.name, 1);
+    const addCardPageFromArray = createCard(item.link, item.name);
+    elements.append(addCardPageFromArray);
 });
 //---------------------------------------
 
@@ -173,5 +167,7 @@ formNewPlace.addEventListener('submit', handleSubmitNewPlace);
 formProfile.addEventListener('submit', handleSubmitProfile);
 closePopupProfileButton.addEventListener('click', closePopupProfile);
 closePopupNewPlaceButton.addEventListener('click', closePopupNewPlace);
+closePopupWithImageButton.addEventListener('click', closePopupWithImage);
 popupProfile.addEventListener('click', handleOverlayClick);
 popupNewPlace.addEventListener('click', handleOverlayClick);
+popupWithImage.addEventListener('click', handleOverlayClick);
