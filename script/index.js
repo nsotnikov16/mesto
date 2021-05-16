@@ -1,5 +1,6 @@
 //КОНСТАНТЫ:
 
+
 //ДЛЯ ПОПАПА ПРОФИЛЯ
 //------------------------------------
 const editButton = document.querySelector('.profile__edit-btn');
@@ -64,10 +65,25 @@ const initialCards = [
     },
   ];
 
+  const config = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__save',
+    inputErrorClass: 'popup__input_type_error',
+    errorActiveClass: 'popup__input-error_active'
+  }; 
+
 //ФУНКЦИИ 
 //------------------------------------------
+enableValidation(config);
+
 function openPopup(popup) {
     popup.classList.add('popup_opened');
+    window.addEventListener('keydown', (evt) => {
+        if (evt.keyCode === 27) {
+            closePopup(popup);
+        }
+    }); 
 }
 
 function openPopupProfile () {
@@ -99,7 +115,7 @@ function closePopupWithImage () {
 function handleOverlayClick(evt) {
     if (evt.target === evt.currentTarget) {
         closePopup(evt.target);
-    }
+    };
 }
 
 function handleSubmitProfile (evt) {
@@ -149,6 +165,7 @@ function handleSubmitNewPlace (evt) {
     popupNamePlace.value = "";
     popupLinkPlace.value = "";
 }
+
 //----------------------------------------
 
 //forEACH

@@ -16,6 +16,14 @@
     opacity: 0.8;
 }
 
+.popup__save:disabled {
+    background-color: transparent;
+    border: 1px solid #000000;
+    color: #000000;
+    opacity: 0.2;
+    cursor: not-allowed;
+  }
+
 @media (max-width: 600px) {
     .popup__save {
         width: 238px;

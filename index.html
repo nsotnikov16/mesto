@@ -36,10 +36,14 @@
             <div class="popup__container container-profile">
                 <button type="button" class="popup__close close-profile"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <form class="popup__form form-profile" name="form">
-                    <fieldset class="popup__main-info main-info-profile">
-                        <input type="text" name="name" class="popup__input popup__input_field_username">
-                        <input type="text" name="info" class="popup__input popup__input_field_info">
+                <form class="popup__form form-profile" name="form-profile" novalidate>
+                    <fieldset class="popup__fieldset">
+                        <input type="text" name="name" id="name-profile-input" placeholder="Имя" class="popup__input popup__input_field_username" minlength="2" maxlength="40" required>
+                        <span class="popup__input-error" id="name-profile-input-error"></span>
+                    </fieldset>
+                    <fieldset class="popup__fieldset">
+                        <input type="text" name="info" id="info-profile-input" placeholder="О себе" class="popup__input popup__input_field_info" minlength="2" maxlength="200" required>
+                        <span class="popup__input-error" id="info-profile-input-error"></span>
                     </fieldset>
                     <button type="submit" class="popup__save save-profile">Сохранить</button>
                 </form>
@@ -49,10 +53,14 @@
             <div class="popup__container container-newplace">
                 <button type="button" class="popup__close close-newplace"></button>
                 <h2 class="popup__title">Новое место</h2>
-                <form class="popup__form form-newplace" name="form">
-                    <fieldset class="popup__main-info">
-                        <input type="text" name="name" placeholder="Название" value="" class="popup__input popup__input_field_nameplace">
-                        <input type="text" name="info" placeholder="Ссылка на картинку" value="" class="popup__input popup__input_field_link">
+                <form class="popup__form form-newplace" name="form-newplace" novalidate>
+                    <fieldset class="popup__fieldset">
+                        <input type="text" name="name" id="name-newplace-input" placeholder="Название" value="" class="popup__input popup__input_field_nameplace" minlength="2" maxlength="30" required>
+                        <span class="popup__input-error" id="name-newplace-input-error"></span>
+                    </fieldset>
+                    <fieldset class="popup__fieldset">
+                        <input type="url" name="info" id="link-newplace-input" placeholder="Ссылка на картинку" value="" class="popup__input popup__input_field_link" required>
+                        <span class="popup__input-error" id="link-newplace-input-error"></span>
                     </fieldset>
                     <button type="submit" class="popup__save save-newplace">Создать</button>
                 </form>
@@ -76,6 +84,7 @@
             <button type="button" class="elements__trash-btn"></button>
         </div>
     </template>
+    <script src="script/validate.js"></script>
     <script src="script/index.js"></script>
 </body>
 </html>
