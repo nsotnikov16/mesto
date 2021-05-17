@@ -35,42 +35,15 @@ const popupWithImageTitle = document.querySelector('.popup-img__title');
 const popupWithImagePhoto = document.querySelector('.popup-img__image');
 const closePopupWithImageButton = document.querySelector('.popup-img__close');
 //-----------------------------------
-
-//ДЛЯ МАССИВА
+const codeEscape = 27;
 //-----------------------------
-const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    },
-  ];
 
   const config = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__save',
     inputErrorClass: 'popup__input_type_error',
-    errorActiveClass: 'popup__input-error_active'
+    errorActiveClass: 'popup__input-error_active',
   }; 
 
 //ФУНКЦИИ 
@@ -79,11 +52,7 @@ enableValidation(config);
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
-    window.addEventListener('keydown', (evt) => {
-        if (evt.keyCode === 27) {
-            closePopup(popup);
-        }
-    }); 
+    window.addEventListener('keydown', closeByEsc); 
 }
 
 function openPopupProfile () {
@@ -94,10 +63,15 @@ function openPopupProfile () {
 
 function openPopupNewPlace () {
     openPopup(popupNewPlace);
+    popupNamePlace.value = "";
+    popupLinkPlace.value = "";
+    hideInputError(formNewPlace, popupNamePlace);
+    hideInputError(formNewPlace, popupLinkPlace);
 }
 
 function closePopup (popup) {
     popup.classList.remove('popup_opened');
+    window.removeEventListener('keydown', closeByEsc); //по сути здесь же нет необходимости удалять слушатель, для формальности же только будет правильно. Или я не прав? Может еще чем-то грозит?)
 }
 
 function closePopupProfile () {
@@ -110,6 +84,12 @@ function closePopupNewPlace () {
 
 function closePopupWithImage () {
     closePopup(popupWithImage);
+}
+
+function closeByEsc (evt) {
+    if (evt.keyCode === codeEscape) {
+        closePopup(popupProfile) || closePopup(popupNewPlace) || closePopup(popupWithImage) ;
+    }
 }
 
 function handleOverlayClick(evt) {
@@ -125,6 +105,21 @@ function handleSubmitProfile (evt) {
     closePopup(popupProfile);
 }
 
+function handleRemoveCard(evt) {
+    evt.target.closest('.elements__place').remove();
+};
+
+function handleLikeCard (evt) {
+    evt.target.classList.toggle('elements__like_active');
+}
+
+function openPopupWithImage (evt) {
+    openPopup(popupWithImage);
+    popupWithImagePhoto.src = evt.target.src;
+    popupWithImagePhoto.alt = evt.target.alt;
+    popupWithImageTitle.textContent = evt.target.alt;
+}
+
 function createCard(link, name) {
     const newPlaceElement = newPlaceTemplate.querySelector('.elements__place').cloneNode(true);
     const trashButton = newPlaceElement.querySelector('.elements__trash-btn');
@@ -136,20 +131,6 @@ function createCard(link, name) {
     photo.alt = name;
     photoTitle.textContent = name;
     
-    function handleRemoveCard(evt) {
-        evt.target.closest('.elements__place').remove();
-    };
-
-    function handleLikeCard (evt) {
-        evt.target.classList.toggle('elements__like_active');
-    }
-
-    function openPopupWithImage (evt) {
-        openPopup(popupWithImage);
-        popupWithImagePhoto.src = evt.target.src;
-        popupWithImageTitle.textContent = evt.target.alt;
-    }
-    
     trashButton.addEventListener('click', handleRemoveCard);
     likeButton.addEventListener('click', handleLikeCard);
     photo.addEventListener('click', openPopupWithImage);
@@ -159,11 +140,12 @@ function createCard(link, name) {
 
 function handleSubmitNewPlace (evt) {
     evt.preventDefault();
-    const addNewCardPage = createCard(popupLinkPlace.value, popupNamePlace.value);
-    elements.prepend(addNewCardPage);
+    const card = createCard(popupLinkPlace.value, popupNamePlace.value);
+    elements.prepend(card);
     closePopup(popupNewPlace);
     popupNamePlace.value = "";
     popupLinkPlace.value = "";
+    saveNewPlaceButton.disabled = true;
 }
 
 //----------------------------------------
@@ -171,8 +153,8 @@ function handleSubmitNewPlace (evt) {
 //forEACH
 //---------------------------------------
 initialCards.forEach(function (item) {
-    const addCardPageFromArray = createCard(item.link, item.name);
-    elements.append(addCardPageFromArray);
+    const card = createCard(item.link, item.name);
+    elements.append(card);
 });
 //---------------------------------------
 
