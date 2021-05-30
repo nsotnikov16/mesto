@@ -1,6 +1,5 @@
 //КОНСТАНТЫ:
 
-
 //ДЛЯ ПОПАПА ПРОФИЛЯ
 //------------------------------------
 const editButton = document.querySelector('.profile__edit-btn');
@@ -24,7 +23,6 @@ const popupNamePlace = document.querySelector('.popup__input_field_nameplace');
 const popupLinkPlace = document.querySelector('.popup__input_field_link');
 const saveNewPlaceButton = document.querySelector('.save-newplace');
 const formNewPlace = document.querySelector('.form-newplace');
-const newPlaceTemplate = document.querySelector('#newplace').content;
 const elements = document.querySelector('.elements');
 //------------------------------------
 
@@ -36,8 +34,9 @@ const popupWithImagePhoto = document.querySelector('.popup-img__image');
 const closePopupWithImageButton = document.querySelector('.popup-img__close');
 //-----------------------------------
 const codeEscape = 27;
-//-----------------------------
 
+//ОБЪЕКТЫ
+//-----------------------------
   const config = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
@@ -46,9 +45,16 @@ const codeEscape = 27;
     errorActiveClass: 'popup__input-error_active',
   }; 
 
+  const profileFormValidator = new FormValidator (config, formProfile);
+
+  profileFormValidator.enableValidation();
+
+  const newPlaceFormValidator = new FormValidator (config, formNewPlace);
+
+  newPlaceFormValidator.enableValidation();
+
 //ФУНКЦИИ 
 //------------------------------------------
-enableValidation(config);
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
@@ -65,13 +71,13 @@ function openPopupNewPlace () {
     openPopup(popupNewPlace);
     popupNamePlace.value = "";
     popupLinkPlace.value = "";
-    hideInputError(formNewPlace, popupNamePlace);
-    hideInputError(formNewPlace, popupLinkPlace);
+    newPlaceFormValidator.hideInputError(popupNamePlace);
+    newPlaceFormValidator.hideInputError(popupLinkPlace);
 }
 
 function closePopup (popup) {
     popup.classList.remove('popup_opened');
-    window.removeEventListener('keydown', closeByEsc); //по сути здесь же нет необходимости удалять слушатель, для формальности же только будет правильно. Или я не прав? Может еще чем-то грозит?)
+    window.removeEventListener('keydown', closeByEsc);
 }
 
 function closePopupProfile () {
@@ -105,56 +111,29 @@ function handleSubmitProfile (evt) {
     closePopup(popupProfile);
 }
 
-function handleRemoveCard(evt) {
-    evt.target.closest('.elements__place').remove();
-};
-
-function handleLikeCard (evt) {
-    evt.target.classList.toggle('elements__like_active');
-}
-
-function openPopupWithImage (evt) {
+export default function openPopupWithImage (evt) {
     openPopup(popupWithImage);
     popupWithImagePhoto.src = evt.target.src;
     popupWithImagePhoto.alt = evt.target.alt;
     popupWithImageTitle.textContent = evt.target.alt;
 }
 
-function createCard(link, name) {
-    const newPlaceElement = newPlaceTemplate.querySelector('.elements__place').cloneNode(true);
-    const trashButton = newPlaceElement.querySelector('.elements__trash-btn');
-    const likeButton = newPlaceElement.querySelector('.elements__like');
-    const photo = newPlaceElement.querySelector('.elements__photo');
-    const photoTitle = newPlaceElement.querySelector('.elements__title');
-    
-    photo.src = link;
-    photo.alt = name;
-    photoTitle.textContent = name;
-    
-    trashButton.addEventListener('click', handleRemoveCard);
-    likeButton.addEventListener('click', handleLikeCard);
-    photo.addEventListener('click', openPopupWithImage);
-
-    return newPlaceElement;
-}
-
 function handleSubmitNewPlace (evt) {
     evt.preventDefault();
-    const card = createCard(popupLinkPlace.value, popupNamePlace.value);
-    elements.prepend(card);
+    const card = new Card (popupLinkPlace.value, popupNamePlace.value, '#newplace');
+    elements.prepend(card.generateCard());
     closePopup(popupNewPlace);
     popupNamePlace.value = "";
     popupLinkPlace.value = "";
     saveNewPlaceButton.disabled = true;
 }
-
 //----------------------------------------
 
 //forEACH
 //---------------------------------------
 initialCards.forEach(function (item) {
-    const card = createCard(item.link, item.name);
-    elements.append(card);
+    const card = new Card(item.link, item.name, '#newplace');
+    elements.append(card.generateCard());
 });
 //---------------------------------------
 
@@ -170,3 +149,8 @@ closePopupWithImageButton.addEventListener('click', closePopupWithImage);
 popupProfile.addEventListener('click', handleOverlayClick);
 popupNewPlace.addEventListener('click', handleOverlayClick);
 popupWithImage.addEventListener('click', handleOverlayClick);
+
+
+//ИМПОРТЫ
+import { Card } from "./Card.js";
+import { FormValidator } from './FormValidator.js';
