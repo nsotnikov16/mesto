@@ -1,3 +1,7 @@
+//ИМПОРТЫ
+import { Card } from "./Card.js";
+import { FormValidator } from './FormValidator.js';
+
 //КОНСТАНТЫ:
 
 //ДЛЯ ПОПАПА ПРОФИЛЯ
@@ -34,6 +38,7 @@ const popupWithImagePhoto = document.querySelector('.popup-img__image');
 const closePopupWithImageButton = document.querySelector('.popup-img__close');
 //-----------------------------------
 const codeEscape = 27;
+const idTemplate = '#newplace';
 
 //ОБЪЕКТЫ
 //-----------------------------
@@ -52,19 +57,33 @@ const codeEscape = 27;
   const newPlaceFormValidator = new FormValidator (config, formNewPlace);
 
   newPlaceFormValidator.enableValidation();
-
+  
 //ФУНКЦИИ 
 //------------------------------------------
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
-    window.addEventListener('keydown', closeByEsc); 
+    document.addEventListener('keydown', closeByEsc);
 }
+
+function closePopup (popup) {
+    popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closeByEsc);
+}
+
+function closeByEsc (evt) {
+    if (evt.keyCode === codeEscape) {
+        const popupOpened = document.querySelector('.popup_opened');
+        closePopup (popupOpened);
+    }
+} 
 
 function openPopupProfile () {
     popupUserName.value = profileUserName.textContent;
     popupInfo.value = profileInfo.textContent;
     openPopup(popupProfile);
+    profileFormValidator.hideInputError(popupUserName);
+    profileFormValidator.hideInputError(popupInfo);
 }
 
 function openPopupNewPlace () {
@@ -73,11 +92,6 @@ function openPopupNewPlace () {
     popupLinkPlace.value = "";
     newPlaceFormValidator.hideInputError(popupNamePlace);
     newPlaceFormValidator.hideInputError(popupLinkPlace);
-}
-
-function closePopup (popup) {
-    popup.classList.remove('popup_opened');
-    window.removeEventListener('keydown', closeByEsc);
 }
 
 function closePopupProfile () {
@@ -90,12 +104,6 @@ function closePopupNewPlace () {
 
 function closePopupWithImage () {
     closePopup(popupWithImage);
-}
-
-function closeByEsc (evt) {
-    if (evt.keyCode === codeEscape) {
-        closePopup(popupProfile) || closePopup(popupNewPlace) || closePopup(popupWithImage) ;
-    }
 }
 
 function handleOverlayClick(evt) {
@@ -111,17 +119,21 @@ function handleSubmitProfile (evt) {
     closePopup(popupProfile);
 }
 
-export default function openPopupWithImage (evt) {
+function openPopupWithImage (evt) {
     openPopup(popupWithImage);
     popupWithImagePhoto.src = evt.target.src;
     popupWithImagePhoto.alt = evt.target.alt;
     popupWithImageTitle.textContent = evt.target.alt;
 }
 
+function createCard (link, name, template, openPopupWithImage) {
+    const card = new Card (link, name, template, openPopupWithImage);
+    return card.generateCard()
+}
+
 function handleSubmitNewPlace (evt) {
     evt.preventDefault();
-    const card = new Card (popupLinkPlace.value, popupNamePlace.value, '#newplace');
-    elements.prepend(card.generateCard());
+    elements.prepend(createCard(popupLinkPlace.value, popupNamePlace.value, idTemplate, openPopupWithImage));
     closePopup(popupNewPlace);
     popupNamePlace.value = "";
     popupLinkPlace.value = "";
@@ -132,8 +144,7 @@ function handleSubmitNewPlace (evt) {
 //forEACH
 //---------------------------------------
 initialCards.forEach(function (item) {
-    const card = new Card(item.link, item.name, '#newplace');
-    elements.append(card.generateCard());
+    elements.append(createCard(item.link, item.name, idTemplate, openPopupWithImage));
 });
 //---------------------------------------
 
@@ -149,8 +160,3 @@ closePopupWithImageButton.addEventListener('click', closePopupWithImage);
 popupProfile.addEventListener('click', handleOverlayClick);
 popupNewPlace.addEventListener('click', handleOverlayClick);
 popupWithImage.addEventListener('click', handleOverlayClick);
-
-
-//ИМПОРТЫ
-import { Card } from "./Card.js";
-import { FormValidator } from './FormValidator.js';

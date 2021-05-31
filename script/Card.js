@@ -1,11 +1,9 @@
 export class Card {
-    constructor (link, name, template) {
+    constructor (link, name, template, openPopupWithImage) {
         this._name = name;
         this._link = link;
         this._template = document.querySelector(template).content;
-
-        this._makeElements ();
-        this._setEventListeners ();
+        this.openPopupWithImage = openPopupWithImage;
     }
     
     _getTemplate () {
@@ -33,10 +31,12 @@ export class Card {
     _setEventListeners () {
         this._trashButton.addEventListener('click', () => this._handleRemoveCard());
         this._likeButton.addEventListener('click', () => this._handleLikeCard());
-        this._photo.addEventListener('click', openPopupWithImage);
+        this._photo.addEventListener('click', this.openPopupWithImage);
     }
 
     generateCard () {
+        this._makeElements ();
+        this._setEventListeners ();
         this._photo.src = this._link;
         this._photo.alt = this._name;
         this._photoTitle.textContent = this._name;
@@ -44,5 +44,3 @@ export class Card {
         return this._element;
     }
 }
-
-import openPopupWithImage from "./index.js";
