@@ -3,7 +3,7 @@ export class Card {
         this._name = name;
         this._link = link;
         this._template = document.querySelector(template).content;
-        this.openPopupWithImage = openPopupWithImage;
+        this._openPopupWithImage = openPopupWithImage;
     }
     
     _getTemplate () {
@@ -31,7 +31,7 @@ export class Card {
     _setEventListeners () {
         this._trashButton.addEventListener('click', () => this._handleRemoveCard());
         this._likeButton.addEventListener('click', () => this._handleLikeCard());
-        this._photo.addEventListener('click', this.openPopupWithImage);
+        this._photo.addEventListener('click', this._openPopupWithImage);
     }
 
     generateCard () {
