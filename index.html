@@ -34,7 +34,7 @@
         </footer>
         <div class="popup popup-profile">
             <div class="popup__container container-profile">
-                <button type="button" class="popup__close close-profile"></button>
+                <button type="button" class="popup__close close-profile close-btn"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form class="popup__form form-profile" name="form-profile" novalidate>
                     <fieldset class="popup__fieldset">
@@ -51,7 +51,7 @@
         </div>
         <div class="popup popup-newplace">
             <div class="popup__container container-newplace">
-                <button type="button" class="popup__close close-newplace"></button>
+                <button type="button" class="popup__close close-newplace close-btn"></button>
                 <h2 class="popup__title">Новое место</h2>
                 <form class="popup__form form-newplace" name="form-newplace" novalidate>
                     <fieldset class="popup__fieldset">
@@ -59,7 +59,7 @@
                         <span class="popup__input-error" id="name-newplace-input-error"></span>
                     </fieldset>
                     <fieldset class="popup__fieldset">
-                        <input type="url" name="info" id="link-newplace-input" placeholder="Ссылка на картинку" value="" class="popup__input popup__input_field_link" required>
+                        <input type="url" name="link" id="link-newplace-input" placeholder="Ссылка на картинку" value="" class="popup__input popup__input_field_link" required>
                         <span class="popup__input-error" id="link-newplace-input-error"></span>
                     </fieldset>
                     <button type="submit" class="popup__save save-newplace">Создать</button>
@@ -70,7 +70,7 @@
             <div class="popup-img__container">
                 <img class="popup-img__image" src="#" alt="#">
                 <h2 class="popup-img__title"></h2>
-                <button type="button" class="popup-img__close"></button>
+                <button type="button" class="popup-img__close close-btn"></button>
             </div>
         </div>
     </div>
@@ -84,9 +84,6 @@
             <button type="button" class="elements__trash-btn"></button>
         </div>
     </template>
-    <script type="module" src="script/index.js"></script>
-    <script type="module" src="script/Card.js"></script>
-    <script type="module" src="script/FormValidator.js"></script>
-    <script src="script/initial-cards.js"></script>
+    <script type="module" src="pages/index.js"></script>
 </body>
 </html>

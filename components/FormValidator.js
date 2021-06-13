@@ -1,4 +1,4 @@
-export class FormValidator {
+export default class FormValidator {
     constructor (config, formElement) {
         this._config = config;
         this._formElement = formElement;
@@ -33,7 +33,6 @@ export class FormValidator {
         }
     };
 
-    //Данная функция будет публичной, т.к. используется в index.js
     hideInputError (inputElement) {
     const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(this._config.inputErrorClass);

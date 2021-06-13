@@ -1,9 +1,9 @@
-export class Card {
-    constructor (link, name, template, openPopupWithImage) {
-        this._name = name;
-        this._link = link;
+export default class Card {
+    constructor (data, template, handleCardClick) {
+        this._name = data.name;
+        this._link = data.link;
         this._template = document.querySelector(template).content;
-        this._openPopupWithImage = openPopupWithImage;
+        this._handleCardClick = handleCardClick;
     }
     
     _getTemplate () {
@@ -31,7 +31,7 @@ export class Card {
     _setEventListeners () {
         this._trashButton.addEventListener('click', () => this._handleRemoveCard());
         this._likeButton.addEventListener('click', () => this._handleLikeCard());
-        this._photo.addEventListener('click', this._openPopupWithImage);
+        this._photo.addEventListener('click', () => this._handleCardClick());
     }
 
     generateCard () {
