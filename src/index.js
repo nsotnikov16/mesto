@@ -1,9 +1,11 @@
-import { createCard } from '../utils/utils.js';
-import Section from '../components/Section.js';
-import UserInfo from '../components/UserInfo.js';
-import { addButton, editButton } from '../utils/constants.js';
-import { initialCards } from '../utils/initial-cards.js';
-import PopupWithForm from "../components/PopupWithForm.js";
+import './pages/index.css';
+
+import { createCard } from './utils/utils.js';
+import Section from './components/Section.js';
+import UserInfo from './components/UserInfo.js';
+import { addButton, editButton } from './utils/constants.js';
+import { initialCards } from './utils/initial-cards.js';
+import PopupWithForm from "./components/PopupWithForm.js";
 
 export const cardsPage = new Section({
     items: initialCards,
