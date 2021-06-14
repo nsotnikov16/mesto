@@ -10,12 +10,13 @@ module.exports = {
         filename: 'main.js',
         publicPath: ''
     },
+    //devtool: 'source-map',
     mode: 'development',
     devServer: {
         contentBase: path.resolve(__dirname, './dist'),
         compress: true, 
         port: 8080, 
-        open: true
+        open: true,
       },
       module: {
         rules: [ 

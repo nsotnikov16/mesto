@@ -1,6 +1,6 @@
 import './pages/index.css';
 
-import { createCard } from './utils/utils.js';
+import { createCard, validationForm } from './utils/utils.js';
 import Section from './components/Section.js';
 import UserInfo from './components/UserInfo.js';
 import { addButton, editButton } from './utils/constants.js';
@@ -20,11 +20,15 @@ const profile = new UserInfo ({userName: '.profile__username', userInfo: '.profi
 const popupNewCard = new PopupWithForm({selectorPopup: ".popup-newplace"}, item => cardsPage.addItemPrepend(createCard(item)));
 const popupProfile = new PopupWithForm ({selectorPopup: ".popup-profile"}, inputsValue => profile.setUserInfo(inputsValue));
 
-addButton.addEventListener('click', () => popupNewCard.open())
+addButton.addEventListener('click', () => {
+    validationForm(popupNewCard);
+    popupNewCard.open();
+})
 
 editButton.addEventListener('click', () => {
     const {name: username, info: userinfo} = profile.getUserInfo();
     popupProfile.inputName.value = username.textContent;
     popupProfile.inputInfo.value = userinfo.textContent;
+    validationForm(popupProfile);
     popupProfile.open();
 })
