@@ -11,10 +11,6 @@ export default class Section {
         })
     }
 
-    clear () {
-        this._container.innerHTML = "";
-    }
-
     addItemPrepend (element) {
         this._container.prepend(element);
     }
