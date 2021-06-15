@@ -2,21 +2,22 @@ import { codeEscape } from "../utils/constants.js";
 
 export default class Popup {
     constructor ({ selectorPopup }) {
-        this.selectorPopup = document.querySelector(selectorPopup);
+        this.popupElement = document.querySelector(selectorPopup);
+        this._handlerEsc = this._handleEscClose.bind(this);
         this.setEventListeners();
     }
 
     open () {
-        this.selectorPopup.classList.add('popup_opened');
-        document.addEventListener('keydown', this._handleEscSlose.bind(this));
+        this.popupElement.classList.add('popup_opened');
+        document.addEventListener('keydown', this._handlerEsc);
     }
 
     close () {
-        this.selectorPopup.classList.remove('popup_opened');
-        document.removeEventListener('keydown', this._handleEscSlose.bind(this));
+        this.popupElement.classList.remove('popup_opened');
+        document.removeEventListener('keydown', this._handlerEsc);
     }
 
-    _handleEscSlose (evt) {
+    _handleEscClose (evt) {
         if (evt.keyCode === codeEscape) {
             this.close ();
         }
@@ -29,8 +30,8 @@ export default class Popup {
     }
 
     setEventListeners () {
-        this._closeButton = this.selectorPopup.querySelector('.close-btn');
+        this._closeButton = this.popupElement.querySelector('.close-btn');
         this._closeButton.addEventListener('click', () => this.close());
-        this.selectorPopup.addEventListener('click', this._handleOverlayClick.bind(this));
+        this.popupElement.addEventListener('click', this._handleOverlayClick.bind(this));
     }
 }
