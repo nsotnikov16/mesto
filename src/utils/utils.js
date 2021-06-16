@@ -1,5 +1,5 @@
 export function hideInputErrorForm (popup, validator) {
-    popup.inputList.forEach(input => {
+    popup._inputList.forEach(input => {
         validator.hideInputError(input)
     })
 }

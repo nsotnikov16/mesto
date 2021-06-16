@@ -51,7 +51,6 @@ export default class FormValidator {
         return this._inputList.some(inputElement => !inputElement.validity.valid);
       };
 
-    //заменил на публичный метод
     toggleButtonState () {
         if (this._hasInvalidInput(this._inputList)) {
           this._buttonElement.disabled = true;

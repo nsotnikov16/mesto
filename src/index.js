@@ -6,7 +6,7 @@ import UserInfo from './components/UserInfo.js';
 import PopupWithForm from "./components/PopupWithForm.js";
 import FormValidator from './components/FormValidator';
 import { hideInputErrorForm } from './utils/utils.js';
-import { addButton, editButton, idTemplate, selectors, config} from './utils/constants.js';
+import { addButton, editButton, profileInputName, profileInputInfo, idTemplate, selectors, config} from './utils/constants.js';
 import { initialCards } from './utils/initial-cards.js';
 
 
@@ -33,7 +33,7 @@ const profile = new UserInfo ({userName: selectors.profileUserName, userInfo: se
 const popupNewCard = new PopupWithForm({selectorPopup: selectors.popupNewPlaceSelector}, item => cardsPage.addItemPrepend(createCard(item)));
 const popupProfile = new PopupWithForm ({selectorPopup: selectors.popupProfileSelector}, inputsValue => profile.setUserInfo(inputsValue));
 const validatorNewPlace = new FormValidator (config, popupNewCard.form);
-validatorNewPlace.enableValidation(); // надеюсь, я Вас правильно понял по замечанию. Или всё таки просто нужно было старую функцию вынести в глобалку?
+validatorNewPlace.enableValidation();
 const validatorProfile = new FormValidator (config, popupProfile.form);
 validatorProfile.enableValidation();
 
@@ -45,8 +45,8 @@ addButton.addEventListener('click', () => {
 
 editButton.addEventListener('click', () => {
     const {name: username, info: userinfo} = profile.getUserInfo();
-    popupProfile.inputName.value = username.textContent;
-    popupProfile.inputInfo.value = userinfo.textContent;
+    profileInputName.value = username.textContent;
+    profileInputInfo.value = userinfo.textContent;
     hideInputErrorForm(popupProfile, validatorProfile);
     popupProfile.open();
 })

@@ -1,6 +1,9 @@
 //КОНСТАНТЫ:
 export const editButton = document.querySelector('.profile__edit-btn');
 export const addButton = document.querySelector('.profile__add-btn');
+export const profileInputName = document.querySelector('#name-profile-input');
+export const profileInputInfo = document.querySelector('#info-profile-input');
+
 export const elements = '.elements';
 export const codeEscape = 27;
 export const idTemplate = '#newplace';
