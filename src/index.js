@@ -3,39 +3,61 @@ import Card from "./components/Card.js";
 import PopupWithImage from "./components/PopupWithImage.js";
 import Section from './components/Section.js';
 import UserInfo from './components/UserInfo.js';
+import Popup from './components/Popup.js';
 import PopupWithForm from "./components/PopupWithForm.js";
-import FormValidator from './components/FormValidator';
-import { hideInputErrorForm } from './utils/utils.js';
-import { addButton, editButton, profileInputName, profileInputInfo, idTemplate, selectors, config} from './utils/constants.js';
-import { initialCards } from './utils/initial-cards.js';
+import FormValidator from './components/FormValidator.js';
+import Api from './components/Api.js';
+import { hideInputErrorForm, hoverEditAvatar } from './utils/utils.js';
+import { addButton, editButton, profileInputName, profileInputInfo, idTemplate, selectors, config, avatarChange, editAvatar, apiRequest, avatar} from './utils/constants.js';
 
-
-const popupWithImage = new PopupWithImage ({selectorPopup: selectors.popupWithImageSelector});
+let userInfoServer = null;
 
 function createCard(item) {
-    const card = new Card (item, idTemplate, () => {
-            popupWithImage.open(item)
+    const card = new Card (item, idTemplate, userInfoServer, () => api.putLikeCard(card.id), () => api.deleteLikeCard(card.id),  () => popupWithImage.open(item), (id, element) => {
+        popupConfirm.other = {id, element}; 
+        popupConfirm.open();
     })
     const cardElement = card.generateCard();
     return cardElement
 }
 
 export const cardsPage = new Section({
-    items: initialCards,
-    renderer: (item) => {
-        cardsPage.addItemAppend(createCard(item));
-    }
+    renderer: (item) => cardsPage.addItemAppend(createCard(item))
 }, selectors.elements)
 
-cardsPage.renderItems();
+const api = new Api(apiRequest);
 
-const profile = new UserInfo ({userName: selectors.profileUserName, userInfo: selectors.profileInfo});
-const popupNewCard = new PopupWithForm({selectorPopup: selectors.popupNewPlaceSelector}, item => cardsPage.addItemPrepend(createCard(item)));
-const popupProfile = new PopupWithForm ({selectorPopup: selectors.popupProfileSelector}, inputsValue => profile.setUserInfo(inputsValue));
+const popupNewCard = new PopupWithForm({selectorPopup: selectors.popupNewPlaceSelector}, 'Создать', 'Создание...', inputsValue => {
+    api.addNewCardServer(inputsValue).then(result => {cardsPage.addItemPrepend(createCard(result)); popupNewCard.editTextButton(popupNewCard.textButtonDefault)}).catch(err => popupError.showErrorServer(err));
+})
+
+const popupProfile = new PopupWithForm ({selectorPopup: selectors.popupProfileSelector}, 'Сохранить', 'Сохранение...', inputsValue => {
+    api.editProfile(inputsValue).then(result => {profile.setUserInfo(result); popupProfile.editTextButton(popupProfile.textButtonDefault)}).catch(err => popupError.showErrorServer(err));
+});
+
+const popupWithImage = new PopupWithImage ({selectorPopup: selectors.popupWithImageSelector});
+
+const profile = new UserInfo ({userName: selectors.profileUserName, userInfo: selectors.profileInfo, userAvatar: selectors.profileAvatar});
+const {name: username, info: userinfo, avatar: useravatar} = profile.getUserInfo();
+
+const popupUpdate = new PopupWithForm({selectorPopup: selectors.popupUpdate}, 'Сохранить', 'Сохранение...',inputsValue => {
+    api.editAvatar(inputsValue).then(result => {avatar.src = result.avatar; popupUpdate.editTextButton(popupUpdate.textButtonDefault)}).catch(err => popupError.showErrorServer(err));
+})
+
+const popupConfirm = new PopupWithForm ({selectorPopup: selectors.popupConfirm}, 'Да', 'Удаление...', () => {
+    api.deleteCard(popupConfirm.other.id).then(() => {popupConfirm.other.element.remove(); popupConfirm.editTextButton(popupConfirm.textButtonDefault)}).catch(err => popupError.showErrorServer(err));
+});
+
+const popupError = new Popup ({selectorPopup: selectors.popupError});
+
 const validatorNewPlace = new FormValidator (config, popupNewCard.form);
 validatorNewPlace.enableValidation();
+
 const validatorProfile = new FormValidator (config, popupProfile.form);
 validatorProfile.enableValidation();
+
+const validatorUpdate = new FormValidator(config, popupUpdate.form)
+validatorUpdate.enableValidation();
 
 addButton.addEventListener('click', () => {
     hideInputErrorForm(popupNewCard, validatorNewPlace)
@@ -44,9 +66,26 @@ addButton.addEventListener('click', () => {
 })
 
 editButton.addEventListener('click', () => {
-    const {name: username, info: userinfo} = profile.getUserInfo();
     profileInputName.value = username.textContent;
     profileInputInfo.value = userinfo.textContent;
+
     hideInputErrorForm(popupProfile, validatorProfile);
     popupProfile.open();
 })
+
+avatarChange.addEventListener('mouseover', hoverEditAvatar);
+avatarChange.addEventListener('mouseout', hoverEditAvatar);
+
+editAvatar.addEventListener('click', () => {
+    hideInputErrorForm(popupUpdate, validatorUpdate);
+    validatorUpdate.toggleButtonState();
+    popupUpdate.open()
+})
+
+Promise.all([api.getUserData(), api.getInitialCards()]).then(([userdata, cards]) => {
+    username.textContent = userdata.name;
+    userinfo.textContent = userdata.about;
+    useravatar.src = userdata.avatar;
+    userInfoServer = userdata;
+    cardsPage.renderItemsServer(cards);
+}).catch(err => popupError.showErrorServer(err))

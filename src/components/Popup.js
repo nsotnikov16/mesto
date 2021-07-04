@@ -29,6 +29,13 @@ export default class Popup {
         }
     }
 
+    showErrorServer(err) {
+        this._title = this._popupElement.querySelector('.popup__title');
+        this._title.textContent = err;
+        this._title.style.margin = 0;
+        this.open();
+    }
+
     setEventListeners () {
         this._closeButton = this._popupElement.querySelector('.close-btn');
         this._closeButton.addEventListener('click', () => this.close());
