@@ -21,7 +21,7 @@ function createCard(item) {
     return cardElement
 }
 
-export const cardsPage = new Section({
+const cardsPage = new Section({
     renderer: (item) => cardsPage.addItemAppend(createCard(item))
 }, selectors.elements)
 
