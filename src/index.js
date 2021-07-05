@@ -9,6 +9,7 @@ import Api from "./components/Api.js";
 import {
   hideInputErrorForm,
   hoverEditAvatar,
+  handleRejected
 } from "./utils/utils.js";
 import {
   addButton,
@@ -42,11 +43,6 @@ function createCard(item) {
   const cardElement = card.generateCard();
   return cardElement;
 }
-
-function handleRejected(err, popup) {
-  popup.editTextButton(popup.textButtonDefault);  
-  alert(err);
-} // Не знаю как лучше будет именно для проектной работы, но считаю что в реальной ситуации, лучше всё таки при ошибке с сервера не закрывать и не сбрасывать форму
 
 const cardsPage = new Section(
   {
