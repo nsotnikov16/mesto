@@ -45,8 +45,8 @@ function createCard(item) {
 }
 
 function handleRejected(err, popup) {
-    popupError.showErrorServer(err);
-    popup.editTextButton(popup.textButtonDefault);
+  popup.editTextButton(popup.textButtonDefault);  
+  alert(err);
 } // Не знаю как лучше будет именно для проектной работы, но считаю что в реальной ситуации, лучше всё таки при ошибке с сервера не закрывать и не сбрасывать форму
 
 const cardsPage = new Section(
@@ -134,8 +134,6 @@ const popupConfirm = new PopupWithForm(
   }
 );
 
-const popupError = new Popup({ selectorPopup: selectors.popupError });
-
 const validatorNewPlace = new FormValidator(config, popupNewCard.form);
 validatorNewPlace.enableValidation();
 
@@ -176,4 +174,4 @@ Promise.all([api.getUserData(), api.getInitialCards()])
     userInfoServer = userdata;
     cardsPage.renderItemsServer(cards);
   })
-  .catch((err) => popupError.showErrorServer(err));
+  .catch((err) => alert(err));

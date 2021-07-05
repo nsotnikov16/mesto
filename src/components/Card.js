@@ -51,12 +51,12 @@ export default class Card {
         this._deleteLike().then((result) => {
           this._likeInfo.textContent = result;
           this._toggleLikeCard();
-        });
+        }).catch(err => alert(err));;
       } else {
         this._putLike().then((result) => {
           this._likeInfo.textContent = result;
           this._toggleLikeCard();
-        });
+        }).catch(err => alert(err));
       }
     }
   
